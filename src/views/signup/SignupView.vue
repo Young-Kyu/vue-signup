@@ -30,6 +30,11 @@ const { addEvent, destoryEvent } = unloadConfirmation();
 onBeforeRouteLeave((to, from, next) => {
   // TODO : 해당 로직에 조건 추가할 것 (조건: store에 사용자 입력값이 존재하는 경우)
   // 화면 뒤로가기 confirm
+  if (stepProcess.value > 0) {
+    stepHandler(stepProcess.value - 1);
+    next(false);
+    return;
+  }
   const answer = window.confirm('페이지를 정말 떠나시겠습니까?');
   if (!answer) {
     next(false); // 방지
