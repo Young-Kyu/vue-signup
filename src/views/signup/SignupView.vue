@@ -3,13 +3,15 @@
 
 <template>
   <Layout>
-    <template v-if="stepProcess === 0">
-      <FirstStep @stepHandler="stepHandler" />
-    </template>
+    <SignupLayout>
+      <template v-if="stepProcess === 0">
+        <FirstStep @stepHandler="stepHandler" />
+      </template>
 
-    <template v-if="stepProcess === 1">
-      <SecondStep @stepHandler="stepHandler" />
-    </template>
+      <template v-if="stepProcess === 1">
+        <SecondStep @stepHandler="stepHandler" />
+      </template>
+    </SignupLayout>
   </Layout>
 </template>
 
@@ -20,6 +22,7 @@ import FirstStep from './components/FirstStep.vue';
 import SecondStep from './components/SecondStep.vue';
 import { unloadConfirmation } from '@/util/backConfirmation';
 import { onBeforeRouteLeave } from 'vue-router'
+import SignupLayout from './components/SignupLayout.vue';
 
 const stepProcess = ref(0);
 

@@ -10,8 +10,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   padding: 24px 16px;
   gap: 40px;
+  background-color: #EEEEEE;
+  border: 1px solid black;
 }
 </style>

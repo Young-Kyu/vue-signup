@@ -1,8 +1,8 @@
 
 
 <template>
-  <button class="button" @click="$emit('clickHandler')">
-    {{ text }}
+  <button class="button" @click="$emit('clickHandler')" :type='type'>
+    {{ btnText }}
   </button>
 </template>
 
@@ -10,15 +10,34 @@
 <style scoped>
 .button {
   padding: 12px 16px;
-  background-color: var(--custom-color, rgb(14, 209, 235));
+  background-color: v-bind('backgroundColor');
   cursor: pointer;
+  border: none;
+  color: #FFF;
 }
 </style>
 
 <script setup lang="ts">
-defineProps<{
-  customColor: string;
-  text: string;
-}>();
+import type { CSSProperties } from 'vue';
 
+withDefaults(defineProps<CommonButtonProps>(), {
+  btnText: '확인',
+  backgroundColor: 'black',
+  type: 'button',
+});
+
+
+// defineEmits<CommonButtonEmits>();
+</script>
+
+<script lang="ts">
+interface CommonButtonProps {
+  backgroundColor: string;
+  btnText: string;
+  type: 'button' | 'submit';
+}
+
+// interface CommonButtonEmits{
+//   (): void;
+// }
 </script>

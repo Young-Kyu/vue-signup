@@ -58,7 +58,6 @@ interface InputFieldProps {
 }
 
 input {
-
   width: 60%;
   height: 30px;
   padding-left: 6px;
