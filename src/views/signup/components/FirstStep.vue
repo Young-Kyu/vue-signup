@@ -2,13 +2,10 @@
 
 
 <template>
-  <SignupLayout>
-    <InputField name="이메일" type="text" :value='email' :error="emailError" @inputHandler="emailInputHandler" />
-    <InputField name="비밀번호" type="password" :value='password' :error="passwordError"
-      @inputHandler="passwordInputHandler" />
-    <InputField name="비밀번호 확인" type="password" :value='confirmPassword' :error="confirmPasswordError"
-      @inputHandler="confirmPasswordInputHandler" />
-  </SignupLayout>
+  <InputField name="이메일" type="text" :value='email' :error="emailError" @inputHandler="emailInputHandler" />
+  <InputField name="비밀번호" type="password" :value='password' :error="passwordError" @inputHandler="passwordInputHandler" />
+  <InputField name="비밀번호 확인" type="password" :value='confirmPassword' :error="confirmPasswordError"
+    @inputHandler="confirmPasswordInputHandler" />
   <button @click="nextStepHandler">다음</button>
 </template>
 
@@ -23,7 +20,6 @@
 const emit = defineEmits(['stepHandler']);
 import { computed, onMounted, ref } from 'vue';
 import InputField from '@/components/common/InputField.vue'
-import SignupLayout from './SignupLayout.vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
@@ -44,9 +40,9 @@ onMounted(() => {
   onMountHandler();
 })
 
-const userName = computed(() => store.getters['user/getSignProcess']);
+const userInfo = computed(() => store.getters['user/getSignProcess']);
 const onMountHandler = () => {
-  const { email: emailStore, password: passwordStore } = userName.value[0];
+  const { email: emailStore, password: passwordStore } = userInfo.value[0];
   if (email && password) {
     email.value = emailStore;
     password.value = passwordStore;
@@ -64,7 +60,6 @@ const nextStepHandler = () => {
   if (allPassValid) {
     emit('stepHandler', 1)
   }
-
 }
 
 const emailValidationCheck = (): boolean => {

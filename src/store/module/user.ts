@@ -12,16 +12,17 @@ interface actionType {
 
 // initial state
 const state: UserState = {
-  name: 'sss',
+  name: 'userModule',
   signUpProcess: [
     [{
       email: '',
       password: '',
     }],
     [{
-      address: '',
       name: '',
       phoneNumber: '',
+      address: '',
+      addressDetail: '',
     }],
     [{
       cardNumber: ['', '', '', '']
@@ -50,7 +51,6 @@ const mutations: MutationTree<UserState> = {
     state.name = name;
   },
   setSignupProcess(state: UserState, { data, step }) {
-    console.log(data);
     state.signUpProcess[step] = data;
   }
 };
