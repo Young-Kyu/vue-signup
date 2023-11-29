@@ -9,10 +9,11 @@
 .wrap {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   padding: 24px 16px;
-  gap: 40px;
-  background-color: #EEEEEE;
+  background-color: #EFEFEF;
   border: 1px solid black;
+  min-height: 500px;
 }
 </style>

@@ -2,27 +2,46 @@
   <div class="wrap">
     <div class="inner-row">
       <div>{{ name }}</div>
-      <input :type="type" :id="name" :value="value" @input="changeInputHandler($event)" />
+      <input ref="inputRef" :type="type" :id="name" :value="value" @input="changeInputHandler($event)"
+        @keyup.enter="keyUpEnter" />
     </div>
     <div v-if="error" class="error-text-wrap">
-      <p class="error-text">{{ error }}</p>
+      <ErrorText :errorText="error" />
     </div>
   </div>
 </template>
 
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, ref } from "vue";
+import ErrorText from "./ErrorText.vue";
 
-defineProps<InputFieldProps>();
+const props = defineProps<InputFieldProps>();
+const { enableEnter } = props;
+const emit = defineEmits(['inputHandler', 'enterHandler']);
+const inputRef = ref<HTMLInputElement | null>(null);
 
-const emit = defineEmits(['inputHandler']);
+const focusInput = () => {
+  if (inputRef.value) {
+    inputRef.value.focus();
+  }
+}
+
+const keyUpEnter = () => {
+  if (enableEnter && inputRef.value) {
+    emit('enterHandler');
+  }
+}
 
 const changeInputHandler = (e: Event) => {
   const value = (e.target as HTMLInputElement).value;
   emit('inputHandler', value);
 }
 
+
+defineExpose({
+  focusInput
+})
 </script>
 
 <script lang="ts">
@@ -31,6 +50,8 @@ interface InputFieldProps {
   name: string;
   type: 'text' | 'password';
   error: string;
+  enableEnter?: boolean;
+  ref?: any;
 }
 </script>
 
@@ -50,11 +71,6 @@ interface InputFieldProps {
 .error-text-wrap {
   display: flex;
   justify-content: flex-end;
-}
-
-.error-text {
-  color: red;
-  font-size: 12px;
 }
 
 input {
