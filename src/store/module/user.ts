@@ -3,7 +3,7 @@ import type { Commit, Mutation } from "vuex/types/index.js";
 
 interface UserState {
   name: string;
-  signUpProcess: Array<any>;
+  signUpProcess: Array<Array<Object>>;
 };
 type MutationsName = 'setName' | 'setSignupProcess';
 interface actionType {
@@ -47,11 +47,27 @@ const actions = {
 // state 상태 변경 로직
 const mutations: MutationTree<UserState> = {
   setName(state: UserState, name: string) {
-    console.log(name);
     state.name = name;
   },
   setSignupProcess(state: UserState, { data, step }) {
     state.signUpProcess[step] = data;
+  },
+  cleanupSignProcess(state: UserState) {
+    state.signUpProcess = [
+      [{
+        email: '',
+        password: '',
+      }],
+      [{
+        name: '',
+        phoneNumber: '',
+        address: '',
+        addressDetail: '',
+      }],
+      [{
+        cardNumber: ['', '', '', '']
+      }]
+    ];
   }
 };
 

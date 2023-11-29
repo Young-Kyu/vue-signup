@@ -11,20 +11,31 @@
       <template v-if="stepProcess === 1">
         <SecondStep @stepHandler="stepHandler" />
       </template>
+
+      <template v-if="stepProcess === 2">
+        <InputCardInfo @stepHandler="stepHandler" />
+      </template>
     </SignupLayout>
   </Layout>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onBeforeUnmount, ref } from 'vue';
 import Layout from '@/components/common/Layout.vue';
 import FirstStep from './components/FirstStep.vue';
 import SecondStep from './components/SecondStep.vue';
 import { unloadConfirmation } from '@/util/backConfirmation';
 import { onBeforeRouteLeave } from 'vue-router'
 import SignupLayout from './components/SignupLayout.vue';
+import InputCardInfo from './components/InputCardInfo.vue';
+import { useStore } from 'vuex';
 
 const stepProcess = ref(0);
+const store = useStore();
+
+onBeforeUnmount(() => {
+  store.commit('user/cleanupSignProcess');
+});
 
 // TODO: 실행 조건 추가하여 addEvent, destory 등록할 것 (조건: store에 사용자 입력값이 존재하는 경우)
 // 새로고침, 브라우저 종료 confirm
@@ -50,4 +61,6 @@ onBeforeRouteLeave((to, from, next) => {
 const stepHandler = (step: number) => {
   stepProcess.value = step;
 }
+
+
 </script>
