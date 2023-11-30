@@ -18,7 +18,10 @@ import ErrorText from "./ErrorText.vue";
 
 const props = defineProps<InputFieldProps>();
 const { enableEnter } = props;
-const emit = defineEmits(['inputHandler', 'enterHandler']);
+const emit = defineEmits<{
+  (e: 'inputHandler', value: string): void
+  (e: 'enterHandler'): void
+}>()
 const inputRef = ref<HTMLInputElement | null>(null);
 
 const focusInput = () => {

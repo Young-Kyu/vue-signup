@@ -1,5 +1,4 @@
 import type { Commit } from "vuex/types/index.js";
-type MutationsName = 'setName';
 interface AboutState {
   name: string;
 };

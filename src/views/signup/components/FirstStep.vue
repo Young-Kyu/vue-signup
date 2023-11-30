@@ -27,7 +27,9 @@
 </style>
 
 <script setup lang="ts">
-const emit = defineEmits(['stepHandler']);
+const emit = defineEmits<{
+  (e: 'stepHandler', step: number): void
+}>();
 import { computed, onMounted, ref } from 'vue';
 import InputField from '@/components/common/InputField.vue'
 import { useStore } from 'vuex';
