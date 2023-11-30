@@ -18,7 +18,10 @@
 </style>
 
 <script setup lang="ts">
-import type { CSSProperties } from 'vue';
+
+defineEmits<{
+  (e: 'clickHandler'): void
+}>();
 
 withDefaults(defineProps<CommonButtonProps>(), {
   btnText: '확인',
@@ -27,7 +30,6 @@ withDefaults(defineProps<CommonButtonProps>(), {
 });
 
 
-// defineEmits<CommonButtonEmits>();
 </script>
 
 <script lang="ts">
@@ -36,8 +38,4 @@ interface CommonButtonProps {
   btnText: string;
   type: 'button' | 'submit';
 }
-
-// interface CommonButtonEmits{
-//   (): void;
-// }
 </script>

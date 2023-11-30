@@ -25,6 +25,54 @@
   </div>
 </template>
 
+
+<style scoped>
+.field-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.address-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.address-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.address-value-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+  height: 30px;
+  padding-left: 6px;
+  border-radius: 6px;
+  border: .5px solid #DEDEDE;
+}
+
+.button-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+
+  & button {
+    width: 50%;
+  }
+}
+</style>
+
 <script setup lang="ts">
 import CommonButton from '@/components/common/CommonButton.vue';
 import ErrorText from '@/components/common/ErrorText.vue';
@@ -33,7 +81,10 @@ import { computed } from '@vue/reactivity';
 import { onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 
-const emit = defineEmits(['stepHandler']);
+const emit = defineEmits<{
+  (e: 'stepHandler', step: number): void
+}>();
+
 const store = useStore();
 
 onMounted(() => {
@@ -155,50 +206,3 @@ interface AddressOpenAPIResponse {
   address: string;
 }
 </script>
-
-<style scoped>
-.field-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.address-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.address-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.address-value-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-}
-
-input {
-  width: 100%;
-  height: 30px;
-  padding-left: 6px;
-  border-radius: 6px;
-  border: .5px solid #DEDEDE;
-}
-
-.button-wrap {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-
-  & button {
-    width: 50%;
-  }
-}
-</style>
