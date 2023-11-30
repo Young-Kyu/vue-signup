@@ -13,8 +13,18 @@ const router = createRouter({
       path: '/signup',
       name: 'signup',
       component: () => import('../views/signup/SignupView.vue')
+    },
+    {
+      path: '/signup/complate',
+      name: 'signupComplate',
+      component: () => import('../views/signup/SignupComplateView.vue')
     }
   ]
 })
+
+router.beforeEach(function (to, from, next) {
+  // 권한이 필요한 화면에 접근 시 현재 로그인 여부를 해당 로직에서 판단해야함.
+  next();
+});
 
 export default router
